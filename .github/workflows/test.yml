@@ -12,4 +12,4 @@ jobs:
       - run: echo "the before ${{ env.GITHUB_EVENT_BEFORE }}"
       - run: echo "the after ${{ env.GITHUB_EVENT_AFTER }}"
       - run: pwd
-      - run: "./test.sh"
+      - run: ${GITHUB_WORKSPACE}/.github/test.sh
