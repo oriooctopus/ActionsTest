@@ -13,6 +13,6 @@ jobs:
       - run: echo "the after ${{ env.GITHUB_EVENT_AFTER }}"
       - run: pwd
       # - run: cd ${GITHUB_WORKSPACE}/.github/
-      # - run: ls
+      - run: ls
       - run: chmod +x "${GITHUB_WORKSPACE}/.github/test.sh"
       - run: ${GITHUB_WORKSPACE}/.github/test.sh
