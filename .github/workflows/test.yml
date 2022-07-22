@@ -12,5 +12,5 @@ jobs:
       - uses: actions/checkout@v2
       - run: echo "the before ${{ env.GITHUB_EVENT_BEFORE }}"
       - run: echo "the after ${{ env.GITHUB_EVENT_AFTER }}"
-      # - run: chmod +x "${GITHUB_WORKSPACE}/.github/test.sh"
+      - run: chmod +x "${GITHUB_WORKSPACE}/.github/test.sh"
       - run: ${GITHUB_WORKSPACE}/.github/test.sh
