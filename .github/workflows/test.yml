@@ -1,11 +1,13 @@
 name: GitHub Actions Demo
 on: [push]
+
 env:
   GITHUB_EVENT_BEFORE: ${{ github.event.before }}
   GITHUB_EVENT_AFTER: ${{ github.event.after }}
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "the before ${{ GITHUB_EVENT_BEFORE }}"
-      - run: echo "the after ${{ GITHUB_EVENT_AFTER }}"
+      - run: echo "the before ${{ env.GITHUB_EVENT_BEFORE }}"
+      - run: echo "the after ${{ env.GITHUB_EVENT_AFTER }}"
