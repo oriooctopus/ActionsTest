@@ -4,7 +4,6 @@ on: [push]
 env:
   GITHUB_EVENT_BEFORE: ${{ github.event.before }}
   GITHUB_EVENT_AFTER: ${{ github.event.after }}
-  GITHUB_EVENT: ${{ github.event }}
 
 jobs:
   Explore-GitHub-Actions:
@@ -12,4 +11,4 @@ jobs:
     steps:
       - run: echo "the before ${{ env.GITHUB_EVENT_BEFORE }}"
       - run: echo "the after ${{ env.GITHUB_EVENT_AFTER }}"
-      - run: echo "the event ${{ env.GITHUB_EVENT }}"
+      - run: "../../test.sh"
