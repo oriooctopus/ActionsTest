@@ -19,7 +19,7 @@ jobs:
         with:
           cmd: "jq .version package.json -r"
       - name: Show my version
-        run: 'echo "version ${{ steps.version.outputs.value }}"'
+        run: 'echo "version ${{ steps.getCoreComponentLibraryPaths.outputs.value }}"'
       - run: echo "the before ${{ env.GITHUB_EVENT_BEFORE }}"
       - run: echo "the after ${{ env.GITHUB_EVENT_AFTER }}"
       - run: chmod +x "${GITHUB_WORKSPACE}/.github/test.sh"
