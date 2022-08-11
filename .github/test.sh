@@ -4,13 +4,13 @@
 
 # mainbranch=$(git remote show origin | grep HEAD | sed -e "s/^.*: //")
 
-changedFiles=$(git diff --diff-filter=ACMRD --name-only ${GITHUB_EVENT_BEFORE}..${GITHUB_EVENT_AFTER})
+# changedFiles=$(git diff --diff-filter=ACMRD --name-only ${GITHUB_EVENT_BEFORE}..${GITHUB_EVENT_AFTER})
 
 # echo 'before'
 # echo $changedFiles
 # echo 'after'
 
-# changedFiles='.github/test.sh test.txt'
+changedFiles='.github/test.sh test.txt'
 
 IFS=', ' read -r -a array <<< "$changedFiles"
 
