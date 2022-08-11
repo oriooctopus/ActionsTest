@@ -1,46 +1,47 @@
-typeofvar () {
+# If any changes are made to this path, please also adjust coreComponentLibraryPaths
+# in alfred/src/main/scala/alfred/processors/FileUtils.scala
+#
+# TODO: SPARK-143849 - once aura-ui migration is complete, investigate
+# if we should centralize this
+coreComponentPaths=(
+  "src/rubrik/spark-ui/src/Libs/AuraDesignSystem"
+  "src/rubrik/spark-ui/src/shared/core"
+  "src/rubrik/aura-ui"
+  "src/rubrik/spark-ui/src/Platform/Wizard"
+  "src/rubrik/spark-ui/icons"
+  "src/rubrik/spark-ui/illustrations"
+  "src/rubrik/spark-ui/src/theme"
+  "src/rubrik/spark-ui/src/styles"
+  "src/rubrik/spark-ui/src/images"
+  "src/rubrik/spark-ui/src/Libs/Components"
+)
 
-    local type_signature=$(declare -p "$1" 2>/dev/null)
-
-    if [[ "$type_signature" =~ "declare --" ]]; then
-        printf "string"
-    elif [[ "$type_signature" =~ "declare -a" ]]; then
-        printf "array"
-    elif [[ "$type_signature" =~ "declare -A" ]]; then
-        printf "map"
-    else
-        printf "none"
-    fi
-
+function trigger_pipeline {
+  curl "https://polaris-builds.stark.rubrik.com/buildByToken/buildWithParameters?job=ChromaticVisualRegressionsCheck&token=CHROMATIC_TRIGGER&User-Agent=Mozilla/5.0"
 }
 
-# git diff --diff-filter=ACMRD --name-only 7c73e5aed106123ebc3587f83134238f0ac7a664..8c388a85b59994709c6b2f5214fc42f16224ec12
+# changedFiles=$(git diff --diff-filter=ACMRD --name-only ${GITHUB_EVENT_BEFORE}..${GITHUB_EVENT_AFTER})
+changedFiles=$(git diff --diff-filter=ACMRD --name-only 72147d8373d448cd21e0c3971a338c19ea18518d..15f1c3bb57dd070929cf7b6b9388865862d6b071)
 
-# branch=$(git rev-parse --abbrev-ref HEAD)
+changedFilesArray=(
+  "polaris/src/rubrik/spark-ui/src/Libs/AuraDesignSystem/RubrikDesignPatterns/AggregationDisplay/AggregationDisplayTotalItem.tsx"
+  "polaris/src/rubrik/spark-ui/src/Platform/Cluster/ClusterDetail/ClusterOverview/ClusterActivity/ClusterActivity.tsx"
+  "randomPath"
+  "polaris/src/rubrik/spark-ui/src/styles/themes/themes.types.tsx"
+)
 
-# mainbranch=$(git remote show origin | grep HEAD | sed -e "s/^.*: //")
-
-changedFiles=$(git diff --diff-filter=ACMRD --name-only ${GITHUB_EVENT_BEFORE}..${GITHUB_EVENT_AFTER})
-# changedFiles='.github/test.sh test.txt'
+# changedFilesArray=(`echo ${changedFiles}`);
 
 
-echo 'the type before'
-typeofvar changedFiles
-echo 'the type after'
 
-echo 'before'
-echo $changedFiles
-echo 'after'
-
-# arr=($changedFiles)
-# read -a arr <<< "$changedFiles"
-# IFS=' ' read -a arr <<< "$changedFiles"
-IFS=' ' read -r -a array <<< "$changedFiles"
-
-for element in "${array[@]}"
+for changedFile in "${changedFilesArray[@]}"
 do
-  echo 'in'
-  echo "$element"
+  for coreComponentPath in "${coreComponentPaths[@]}"
+  do
+    if [[ "$changedFile" == *"$coreComponentPath"* ]]; then
+      trigger_pipeline
+      exit 0
+    fi
+  done
 done
-echo 'done'
 
