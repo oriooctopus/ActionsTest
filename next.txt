@@ -1,0 +1,8 @@
+You are succesffully diffing files
+
+W
+
+TODO:
+Next part depends on where the
+1. Call jenkins pipeline passing in files list
+2. Receive argument in pipeline and check if core component library was modified
