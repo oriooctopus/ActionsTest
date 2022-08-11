@@ -23,7 +23,7 @@ typeofvar () {
 changedFiles=$(git diff --diff-filter=ACMRD --name-only ${GITHUB_EVENT_BEFORE}..${GITHUB_EVENT_AFTER})
 
 echo 'the type before'
-echo typeofvar changedFiles
+echo typeofvar $changedFiles
 echo 'the type after'
 
 # echo 'before'
