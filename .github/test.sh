@@ -28,9 +28,9 @@ echo 'the type before'
 typeofvar changedFiles
 echo 'the type after'
 
-# echo 'before'
-# echo $changedFiles
-# echo 'after'
+echo 'before'
+echo $changedFiles
+echo 'after'
 
 
 IFS=', ' read -r -a array <<< "$changedFiles"
