@@ -32,8 +32,10 @@ echo 'before'
 echo $changedFiles
 echo 'after'
 
-
-IFS=', ' read -r -a array <<< "$changedFiles"
+# arr=($changedFiles)
+# read -a arr <<< "$changedFiles"
+# IFS=' ' read -a arr <<< "$changedFiles"
+IFS=' ' read -r -a array <<< "$changedFiles"
 
 for element in "${array[@]}"
 do
