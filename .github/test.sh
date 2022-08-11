@@ -12,4 +12,3 @@ do
     echo "$element"
 done
 
-echo $changedFiles
