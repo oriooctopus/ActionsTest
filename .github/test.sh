@@ -6,14 +6,18 @@
 
 changedFiles=$(git diff --diff-filter=ACMRD --name-only ${GITHUB_EVENT_BEFORE}..${GITHUB_EVENT_AFTER})
 
-echo 'before'
-echo $changedFiles
-echo 'after'
+# echo 'before'
+# echo $changedFiles
+# echo 'after'
+
+# changedFiles='.github/test.sh test.txt'
 
 IFS=', ' read -r -a array <<< "$changedFiles"
 
 for element in "${array[@]}"
 do
-    echo "$element"
+  echo 'in'
+  echo "$element"
 done
+echo 'done'
 
