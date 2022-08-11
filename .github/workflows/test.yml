@@ -1,5 +1,8 @@
 name: GitHub Actions Demo
-on: [push]
+on:
+  push:
+    branches:
+      - actions-test
 
 env:
   GITHUB_EVENT_BEFORE: ${{ github.event.before }}
@@ -13,6 +16,8 @@ jobs:
         with:
           ref: "master"
           fetch-depth: "0"
+      - run: ls
+      - run: ${GITHUB_WORKSPACE} ls
       - run: echo "the before ${{ env.GITHUB_EVENT_BEFORE }}"
       - run: echo "the after ${{ env.GITHUB_EVENT_AFTER }}"
       - run: chmod +x "${GITHUB_WORKSPACE}/.github/test.sh"
