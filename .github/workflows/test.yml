@@ -13,13 +13,6 @@ jobs:
         with:
           ref: "master"
           fetch-depth: "0"
-      - name: Run jq
-        id: getCoreComponentLibraryPaths
-        uses: sergeysova/jq-action@v2
-        with:
-          cmd: "jq .version package.json -r"
-      - name: Show my version
-        run: 'echo "version ${{ steps.getCoreComponentLibraryPaths.outputs.value }}"'
       - run: echo "the before ${{ env.GITHUB_EVENT_BEFORE }}"
       - run: echo "the after ${{ env.GITHUB_EVENT_AFTER }}"
       - run: chmod +x "${GITHUB_WORKSPACE}/.github/test.sh"

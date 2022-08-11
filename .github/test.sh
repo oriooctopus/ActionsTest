@@ -4,3 +4,5 @@
 # mainbranch=$(git remote show origin | grep HEAD | sed -e "s/^.*: //")
 
 changedFiles=$(git diff --diff-filter=ACMRD --name-only ${GITHUB_EVENT_BEFORE}..${GITHUB_EVENT_AFTER})
+
+echo $changedFiles
